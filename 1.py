@@ -1,6 +1,2 @@
-print(1==1)
-print(1==2)
-print(1>2)
-print(1<2)
-print(1+2==3)
-print(True)
+in_str = input("입력해주세요.\n")
+print(in_str.upper()+" world!")
