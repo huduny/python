@@ -10,9 +10,9 @@ public class floatdoubbkle {
 	 */
 		
 	float var1 = 3.14f;
-	double var2 = 3.14;
+	double var2 = 3.14d;
 	
-	System.out.println(var1);
+	System.out.println(var2-);
 		
 	// 지수(exponential) 사용하기 e
 	double var3 = 3e6;//3*10^6;
