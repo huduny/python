@@ -3,7 +3,7 @@ CREATE TABLE TEMP01(
         COL2 CHAR(20 BYTE),
         COL3 CHAR(20 CHAR));
         
-        INSERT INTO TEMP01 VALUES('¹«±ÃÈ­ ²ÉÀÌ ÇÇ', 'APPLE PERSIMON', '¹«±ÃÈ­ ²ÉÀÌ ÇÇ¾ú½À´Ï´Ù');
+        INSERT INTO TEMP01 VALUES('ë¬´ê¶í™” ê½ƒì´ í”¼', 'APPLE PERSIMON', 'ë¬´ê¶í™” ê½ƒì´ í”¼ì—ˆìŠµë‹ˆë‹¤');
         
         SELECT * FROM TEMP01;
        SELECT  LENGTHB(COL1),
@@ -11,7 +11,7 @@ CREATE TABLE TEMP01(
                LENGTHB(COL3)
           FROM TEMP01;     
                
-»ç¿ë¿¹)
+ì‚¬ìš©ì˜ˆ)
 CREATE TABLE TEMP02(
     COL1 CHAR(2000),
     COL2 VARCHAR2(4000 BYTE),
@@ -27,7 +27,7 @@ CREATE TABLE TEMP02(
                LENGTHB(COL3)
           FROM TEMP02;         
                
-»ç¿ë¿¹)
+ì‚¬ìš©ì˜ˆ)
 CREATE TABLE TEMP03(
     COL1 VARCHAR2(4000),
     COL2 LONG,
@@ -35,13 +35,13 @@ CREATE TABLE TEMP03(
 CREATE TABLE TEMP03(
     COL1 VARCHAR2(4000),
     COL2 LONG);              
-INSERT INTO TEMP03 VALUES('´ëÀü½Ã Áß±¸ ´ëÈïµ¿ 500','´ëÀü½Ã Áß±¸ ´ëÈïµ¿ 500');
+INSERT INTO TEMP03 VALUES('ëŒ€ì „ì‹œ ì¤‘êµ¬ ëŒ€í¥ë™ 500','ëŒ€ì „ì‹œ ì¤‘êµ¬ ëŒ€í¥ë™ 500');
 
 SELECT * FROM TEMP03;
     
-SELECT SUBSTR(COL1,1,10)--±ÛÀÚ¸¦ ÃßÃâÇÑ´Ù, ¿À¶óÅ¬(ÀÚ¸´¼ö) ÀÚ¹Ù(¸¶Áö¸·¼ø¹ø)
-       --SUBSTR(COL2,2,6)--À§Ä¡³ª °¹¼ö¸¦ ³ªÅ¸³»´Â ÇÔ¼ö´Â ÀÏ¹ÝÀûÀ¸·Î ¸ø¾´´Ù ±× ÀÌÀ¯´Â ³Ê¹« Å« ¹ÙÀÌÆ®°¡ ÇÊ¿äÇØ¼­
-       --CLOB¿Í BLOB´Â DBMS_LOB¿¡¼­ Àü¿ëÇÔ¼ö°¡ µû·Î ÀÖ´Ù.
+SELECT SUBSTR(COL1,1,10)--ê¸€ìžë¥¼ ì¶”ì¶œí•œë‹¤, ì˜¤ë¼í´(ìžë¦¿ìˆ˜) ìžë°”(ë§ˆì§€ë§‰ìˆœë²ˆ)
+       --SUBSTR(COL2,2,6)--ìœ„ì¹˜ë‚˜ ê°¯ìˆ˜ë¥¼ ë‚˜íƒ€ë‚´ëŠ” í•¨ìˆ˜ëŠ” ì¼ë°˜ì ìœ¼ë¡œ ëª»ì“´ë‹¤ ê·¸ ì´ìœ ëŠ” ë„ˆë¬´ í° ë°”ì´íŠ¸ê°€ í•„ìš”í•´ì„œ
+       --CLOBì™€ BLOBëŠ” DBMS_LOBì—ì„œ ì „ìš©í•¨ìˆ˜ê°€ ë”°ë¡œ ìžˆë‹¤.
 FROM TEMP03;    
     
     
