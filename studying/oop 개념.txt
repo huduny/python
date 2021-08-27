@@ -1,0 +1,106 @@
+<OOP> 객체지향
+
+Oop 사용이유: re-usability, code maintance, cod redundancy, security etc. 
+
+-oop: design a program using classes and objects 
+-objects: are instances of classes and also real entities of the world 
+-classes: are collection of objects 
+ 
+-4가지 핵심 방법
+>Polymorphism: many forms that can be overloaded or overrriden 
+>Abstraction: to the data hiding, displays only the information required by the user 
+>Inheritance: acquiring or inheriting properties of one class to the other 
+>Encapsulation: wrapping of the data, get and set methods  
+ 
+-objects
+>are created from class, abstract data types, always correspond with the real world, contains addresses and space in memory, objects: (state/behaviour) 
+>ex) dog, chair, tree etc. 
+>ex) object(anima) /state(colour, name, breed etc)/behaviour(eating, wagging,etc) 
+>ex) class mybook/ creating objects=>Mybook mybook = new Mybook();/return value=>sysout(mybook) 
+ 
+-classes 
+>are the collection of objects, classes don’t consume any space in memory, classes(fields, methods, constructors) 
+>class declaration 
+Modifiers: can be public or default access 
+Class name: initial letter 
+Superclass: A class can only subclass one parent 
+Interfaces: A class can implement more than one 
+Body: body surrounded by braces { } 
+>instance variables: variables and data within class 
+abstraction: data hiding, needed information 
+Abstraction method는 정의는 되지만 실행은 되지 않는다., 2개 이상의 subclass에 같은 작업을 다른 방법으로 할때 
+Abstraction is to do feched removed selected the data 
+ 
+-inheritance
+>is hierachical clssification, parent-child relationship 
+>ex) whale=>classification of marine animal=>part of class mammal 
+If wnna more detail giving specific attributes like teeth, cold-blooded etc. 
+Animal(superclass)-subclass(mamal) inherited properties from Animal 
+
+Single level: class a{ } 
+class b extends class a{ } 
+
+Multilevel: class a{ } 
+Class b extemds class a{} 
+Class c extends class b{} 
+
+Hierarchical(one parent) 
+Class a {} 
+Class b extends class a{} 
+Class c extends class a{} 
+
+-polymorphism(compile time/ run time) 
+Ct: overload a static method in java 
+Rt: overridden method 
+>static/ct, method overloading 
+Dynamic/rt, method overridden 
+ 
+-encapsulation
+>binds togther the data and code into a single unit, it is hidden so can be accessed by only this method, can do ‘privated’, encap fields only read or write 
+
+-coupling in java
+>one class is modified its properties or behaviors affect the dependent changes 
+>tight coupling: strongly interrelated to another class 
+ Loose coupling: weakly interelated to another class 
+ 
+-cohesion in java
+>meaningfully and strongly related to each other like attributes and methods 
+>low 
+ highly 
+
+-association in java
+>a relation between two separate classes one to one, one to many, many to one, many to many 
+>ex) bus, passengers 
+1-1) a bus can have only one driver 
+M-1) many passangers/ single bus 
+1-m) single passnger/ different busses 
+M-m) many passengers/ different busses 
+>aggregation:weak association 
+ Composition:strong association 
+>Aggregation(undirectional association): relationship between an object containing other objects. 
+Ex) group and person: A group has multiple persons. If delete a group, the person object can not be destroyed. So both the entries can survive individually 
+>Composition(strong association): a cannot exit without a whole  
+Ex) school and room: if school object is destroyed, all rooms are destroyed 
+Composition between two entities: the created object cannot exit without the other object 
+ 
+-method in java  
+>A method is written and can be utilized many times 
+>pre-defined 
+ User-defined 
+>static method: 
+the static keyword using static before the method name, invoke the static method without even creating an object 
+>abstract method: 
+dosen’t have an implementation or body or block of code, it should be declared abstract but it is not compulsory 
+>final method: 
+declared final cannot overide, to stop the modification of the method by the sub-class 
+>equals method: 
+used to compare two objects for equality it checks them char by char. String equals() methid cimpare two given string, ==operator is used for address composition 
+>message passing: 
+sending an object a message from one thread to another thread 
+Synchronous: run at the same time 
+Asynchronous: receiving object can be down or busy when the requesting object require 
+ 
+-encapsulation allows us to migrate, implemnent, over time without breaking the code. 
+
+-polymorphism allows us to create a readable, clean, sensible code 
+       
