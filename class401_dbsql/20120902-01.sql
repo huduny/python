@@ -237,15 +237,22 @@ ORDER BY    1;
 자기부서의 평균급여보다 많은
 
 SELECT      DEPARTMENT_ID 부서번호, DEPARTMENT_NAME 부서명, SALARY 급여, 부서평균급여
-FROM        DEPARTMENTS A, EMPLOYEES B
+FROM        DEPARTMENTS A, EMPLOYEES B;
 
 부서 평균 급여
 SELECT    A.DEPARTMENT_ID AS 부서번호, 
-          AVG(B.SALARY) AS 부서평균급여
+          ROUND(AVG(B.SALARY)) AS 부서평균급여
 FROM      DEPARTMENTS A, EMPLOYEES B
 WHERE     A.DEPARTMENT_ID= B.DEPARTMENT_ID  
-GROUP BY  DEPARTMENT_ID
+GROUP BY  A.DEPARTMENT_ID;
 
-
-
-
+합치기
+SELECT      B.DEPTNO AS 부서번호, B.DEPTNAME AS 부서명, A.EMP_NAME AS 사원이름 ,A.SALARY AS 급여, B.AVGSAL AS 부서평균급여
+FROM        EMPLOYEES A LEFT OUTER JOIN (SELECT      A.DEPARTMENT_ID AS DEPTNO, 
+                                      A.DEPARTMENT_NAME AS DEPTNAME,
+                                      ROUND(AVG(B.SALARY)) AS AVGSAL
+                            FROM      DEPARTMENTS A, EMPLOYEES B
+                            WHERE     A.DEPARTMENT_ID= B.DEPARTMENT_ID  
+                            GROUP BY  A.DEPARTMENT_ID, A.DEPARTMENT_NAME) B ON (A.DEPARTMENT_ID = B.DEPTNO)
+WHERE       A.SALARY > B.AVGSAL;
+--
