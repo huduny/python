@@ -285,6 +285,94 @@ RANK함수는 앞에 순위를 비교하고 같은 값이 있으면 두번째 기준으로 구별한다
 
 사용예) 2005년 5월 회원별 구매금액 합계를 구하되 4월 구매한 모든 회원의 구매금액 보다 많은 회원들을 조회하시오.
       (MAX함수를 사용하지 마시오)
+
+(4월 구매한 모든 회원의 구매금액)(모든=OUTER조인)(모든 회원, 구매금액, 회원이름
+SELECT  Z.CART_PROD AS CAPO, 
+        SUM(Z.CART_QTY*X.PROD_PRICE) AS SUMP, 
+        C.MEM_ID AS MID, 
+        C.MEM_NAME AS MNA
+FROM    MEMBER C LEFT OUTER JOIN CART Z ON (C.MEM_ID = Z.CART_MEMBER)
+        OUTER JOIN ON PROD X ( X.PROD_ID =Z.CART_PROD)
+WHERE   SUBSTR(Z.CART_NO,1,6) LIKE '200504'
+GROUP BY Z.CART_PROD, C.MEM_ID, C.MEM_NAME
       
+SELECT      MEM_ID     
+            MEM_NAME
+            
+SELECT      A.CART_MEMBER AS MNA,     
+            SUM(A.CART_QTY*B.PROD_PRICE) AS SSELL
+FROM        CART A, PROD B   
+WHERE       A.CART_PROD = B.PROD_ID
+AND         SUBSTR(A.CART_NO,1,6) LIKE '200504'
+GROUP BY    A.CART_MEMBER      
+----------------------------------------------------------------------
+RESULT) 4월 구매한 모든 회원의 구매금액 합계      
+SELECT      A.CART_MEMBER AS MNA,     
+            NVL(SUM(A.CART_QTY*B.PROD_PRICE),0) AS SSELL
+FROM        CART A LEFT OUTER JOIN PROD B ON (A.CART_PROD = B.PROD_ID AND SUBSTR(A.CART_NO,1,6) LIKE '200504')
+GROUP BY    A.CART_MEMBER           
+      
+-----------------------------------------------------------------------      
+SELECT  Z.CART_PROD AS CAPO, 
+        C.MEM_ID AS MID, 
+        C.MEM_NAME AS MNA,
+        NVL(Z.CART_QTY, 0) AS SQTY
+FROM    MEMBER C LEFT OUTER JOIN CART Z ON (C.MEM_ID = Z.CART_MEMBER)
+WHERE   SUBSTR(Z.CART_NO,1,6) LIKE '200504'
+-----------------------------------------------------------------------      
+RESULT) 2005년 5월 회원별 구매금액 합계 
+RESULT) 5월 구매한 모든 회원의 구매금액 합계      
+SELECT      A.CART_MEMBER AS MNA,     
+            NVL(SUM(A.CART_QTY*B.PROD_PRICE),0) AS SSELL
+FROM        CART A LEFT OUTER JOIN PROD B ON (A.CART_PROD = B.PROD_ID AND SUBSTR(A.CART_NO,1,6) LIKE '200505')
+GROUP BY    A.CART_MEMBER       
+--------------------------------------------------------------------     
+      
+합치기)     
+2005년 5월 회원별 구매금액 합계를 구하되/ 4월 구매한 모든 회원의 구매금액 보다 많은 회원들을 조회하시오.(MAX함수를 사용하지 마시오)
+SELECT      A.CART_MEMBER AS MNA,     
+            NVL(SUM(A.CART_QTY*B.PROD_PRICE),0) AS SSELL
+            
+FROM        CART A LEFT OUTER JOIN PROD B ON (A.CART_PROD = B.PROD_ID AND SUBSTR(A.CART_NO,1,6) LIKE '200505')
+            
+            OUTER JOIN (SELECT      A.CART_MEMBER AS MNA,     
+            NVL(SUM(A.CART_QTY*B.PROD_PRICE),0) AS SSELL
+            FROM        CART A LEFT OUTER JOIN PROD B ON (A.CART_PROD = B.PROD_ID AND SUBSTR(A.CART_NO,1,6) LIKE '200504')
+            GROUP BY    A.CART_MEMBER) C ON (A.CART_MEMBER = C.MNA)   
+
+GROUP BY    A.CART_MEMBER 
+WHERE   
 
 
+SELECT      C.MEM_ID AS 회원아이디,
+            C.MEM_NAME AS 회원이름,
+            X.SSELL  AS 구매금액합계
+            
+FROM       (SELECT      A.CART_MEMBER AS MNA,     
+            NVL(SUM(A.CART_QTY*B.PROD_PRICE),0) AS SSELL
+            FROM        CART A LEFT OUTER JOIN PROD B ON (A.CART_PROD = B.PROD_ID AND SUBSTR(A.CART_NO,1,6) LIKE '200504')
+            GROUP BY    A.CART_MEMBER) Z LEFT OUTER JOIN 
+            
+            (SELECT      A.CART_MEMBER AS MNA,     
+            NVL(SUM(A.CART_QTY*B.PROD_PRICE),0) AS SSELL
+            FROM        CART A LEFT OUTER JOIN PROD B ON (A.CART_PROD = B.PROD_ID AND SUBSTR(A.CART_NO,1,6) LIKE '200505')
+            GROUP BY    A.CART_MEMBER) X ON (Z.MNA=X.MNA) 
+            
+            LEFT OUTER JOIN
+            MEMBER C  ON (Z.MNA=C.MEM_ID) 
+            
+WHERE       X.SSELL > Z.SSELL
+
+2005년 4월 매입 매출정보 BUYPROD /모든: 아우터조인
+1.매입정보 (4월 매입정보)
+SELECT      A.PROD_ID AS BP, 
+            NVL(SUM(B.BUY_QTY),0) AS BQ,
+            NVL(SUM(B.BUY_QTY*B.BUY_COST),0) AS BQC
+FROM        PROD A LEFT OUTER JOIN BUYPROD B ON (A.PROD_ID=B.BUY_PROD AND BUY_DATE BETWEEN '20050401' AND '20050430')
+GROUP BY    A.PROD_ID
+2.매출정보 (4월 매출정보)
+SELECT      C.PROD_ID AS CP,
+            NVL(SUM(D.CART_QTY),0) AS CQ,
+            NVL(SUM(D.CART_QTY*C.PROD_PRICE),0) AS CPP
+FROM        PROD C LEFT OUTER JOIN CART D ON (C.PROD_ID=D.CART_PROD AND SUBSTR(CART_NO,1,6) LIKE '200504')
+GROUP BY    C.PROD_ID
