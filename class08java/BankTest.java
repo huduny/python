@@ -1,19 +1,19 @@
-package homeworks_09M;
+package homeworks09;
 
 public class BankTest {
     public static void main(String[] args) {
         Bank bank = new Bank();
 
         Customer customer1 = new Customer("Tony", "Stark");
-        customer1.setAccount(new BankAccount(100_000));
+        customer1.setAccount(new BankAcoount(100_000));
         bank.addCustomer(customer1);
 
         Customer customer2 = new Customer("Peter", "Parker");
-        customer2.setAccount(new BankAccount(100));
+        customer2.setAccount(new BankAcoount(100));
         bank.addCustomer(customer2);
 
         Customer customer3 = new Customer("Thor", "Odinson");
-        customer3.setAccount(new BankAccount(30_000));
+        customer3.setAccount(new BankAcoount(30_000));
         bank.addCustomer(customer3);
 
         int max = Integer.MIN_VALUE;
