@@ -48,14 +48,14 @@ ORDER BY 1;
 모든(OUTTER 조인) 거래처별(GROUP BY)
 
 SELECT      거래처코드, 거래처명, 매입금액합계, 매출금액합계
-FROM        BUYER A, (서브쿼리:2005년도 거래처별 매입금액합계) B, (서브쿼리:2005년 거래처별 매출금액합계) C, BUYPROD B, CART C, PROD D
+FROM        BUYER A, (서브쿼리:2005년도 거래처별 매입금액합계) B, (서브쿼리:2005년 거래처별 매출금액합계D) C, BUYPROD B, CART C, PROD D
 --모든이 빠진 것은 이너조인
 --거래처코드가 A에 훨씬더 많다.--한테이블이 동시에 확장 되는 것은 안되지만 A를 기준으로 B가 확장되고 A를 기준으로 C가확장되는 것은 괜찮다.
 
 --2005년도 거래처별 매입금액합계
 SELECT  BUYER_ID AS BID,
         SUM(BUY_QTY*PROD_COST) AS BAMT
-FROM    BUYPROD, PROD, BUYER
+FROM    BUYPROD, PROD, BUYER 
 WHERE   BUY_PROD = PROD_ID
 AND     PROD_BUYER = BUYER_ID --이부분 까지가 거래처별
 AND     EXTRACT(YEAR FROM BUY_DATE)=2005
@@ -292,7 +292,7 @@ SELECT  Z.CART_PROD AS CAPO,
         C.MEM_ID AS MID, 
         C.MEM_NAME AS MNA
 FROM    MEMBER C LEFT OUTER JOIN CART Z ON (C.MEM_ID = Z.CART_MEMBER)
-        OUTER JOIN ON PROD X ( X.PROD_ID =Z.CART_PROD)
+        LEFT OUTER JOIN ON PROD X ( X.PROD_ID =Z.CART_PROD)
 WHERE   SUBSTR(Z.CART_NO,1,6) LIKE '200504'
 GROUP BY Z.CART_PROD, C.MEM_ID, C.MEM_NAME
       
