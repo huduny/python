@@ -1,4 +1,4 @@
-package homeworks09_01;
+package homeworks09_09_02;
 
 public class SavingsAccount extends BankAcoount {
 	
@@ -11,6 +11,13 @@ public class SavingsAccount extends BankAcoount {
 	
 	void updateBalance(int period) {
 		this.balance += this.balance*interestRate*period;
+		
+	}
+
+	@Override
+	String getAccountType() {
+		// TODO Auto-generated method stub
+		return String.format("저축예금"+"%d", this.balance);
 	}
 	
 	

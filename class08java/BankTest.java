@@ -1,51 +1,29 @@
-package homeworks09;
+package homeworks09_09_02;
 
 public class BankTest {
-    public static void main(String[] args) {
-        Bank bank = new Bank();
-
-        Customer customer1 = new Customer("Tony", "Stark");
-        customer1.setAccount(new BankAcoount(100_000));
-        bank.addCustomer(customer1);
-
-        Customer customer2 = new Customer("Peter", "Parker");
-        customer2.setAccount(new BankAcoount(100));
-        bank.addCustomer(customer2);
-
-        Customer customer3 = new Customer("Thor", "Odinson");
-        customer3.setAccount(new BankAcoount(30_000));
-        bank.addCustomer(customer3);
-
-        int max = Integer.MIN_VALUE;
-        int min = Integer.MAX_VALUE;
-        Customer maxBalanceCustomer = null;
-        Customer minBalanceCustomer = null;
-        for (int i = 0; i < bank.getNumberOfCustomers(); i++) {
-            Customer account = bank.getCustomer(i);
-//            account.getAccount()+>BankAccount
-            if (account.getAccount().getBalance() > max) {
-                max = account.getAccount().getBalance();
-                maxBalanceCustomer = account;
-            }
-            if (account.getAccount().getBalance() < min) {
-                min = account.getAccount().getBalance();
-                minBalanceCustomer = account;
-            }
-        }
-        System.out.println("잔고가 가장 많은 사람");
-        System.out.println(maxBalanceCustomer);
-        System.out.println("잔고가 가장 적은 사람");
-        System.out.println(minBalanceCustomer);
-        if (maxBalanceCustomer.getAccount().transfer(max / 2, minBalanceCustomer.getAccount())) {
-            System.out.println(maxBalanceCustomer.getFirstName() + "가 " + minBalanceCustomer.getFirstName() + "에게 잔고의 반을 송금");
-        } else {
-            System.out.println("송금되지 않았습니다.");
-        }
-        System.out.println("송금 후 모든 고객의 정보");
-        for (Customer c : bank.getCustomers()) {
-            if (c != null) {
-                System.out.println(c);
-            }
-        }
-    }
-}
+	   public static void main(String[] args) {
+	      
+	      CheckingAccount tonyAccount = new CheckingAccount(3000);
+	      CheckingAccount steveAccount = new CheckingAccount(4000);
+	      try {
+	         tonyAccount.transfer(5000, steveAccount);
+	         System.out.println("송금 완료");
+	      } catch (NullPointerException e){
+	         System.out.println("해당하는 계좌가 없습니다.");
+	         System.out.println("송금 실패");
+	      } catch (IllegalArgumentException e){
+	         System.out.println("해당하는 금액을 보낼 수 없습니다.");
+	         System.out.println("송금 실패");
+	      }
+	      try {
+	         tonyAccount.transfer(2000, null);
+	         System.out.println("송금 완료");
+	      } catch (NullPointerException e){
+	         System.out.println("해당하는 계좌가 없습니다.");
+	         System.out.println("송금 실패");
+	      } catch (IllegalArgumentException e){
+	         System.out.println("해당하는 금액을 보낼 수 없습니다.");
+	         System.out.println("송금 실패");
+	      }
+	   }
+	}

@@ -1,4 +1,4 @@
-package homeworks09_01;
+package homeworks09_09_02;
 
 public class CheckingAccount extends BankAcoount{
 	private SavingsAccount protectedBy;
@@ -28,6 +28,12 @@ public class CheckingAccount extends BankAcoount{
 			return false;
 		}
 		return super.withdraw(amount);
+	}
+
+	@Override
+	String getAccountType() {
+		
+	  return String.format("당좌예금"+"%d", this.balance);
 	}
 	
 	

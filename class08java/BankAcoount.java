@@ -1,8 +1,9 @@
-package homeworks09;
+package homeworks09_09_02;
 
-public class BankAcoount {
+
+public abstract class  BankAcoount {
 	//잔액
-	private int balance;
+	protected int balance;
 	//생성자(잔액 초기 세팅)
 	public BankAcoount(int balance) {
 		this.balance = balance;
@@ -31,6 +32,13 @@ public class BankAcoount {
 	//계좌이체 가능여부
 	//객체.밸런스로 접근:현재계좌 잔액
 	public boolean transfer(int amount, BankAcoount otherAccount) {
+		if (otherAccount.equals(null)) {
+			throw new NullPointerException();
+		}
+		if (amount<0||amount>this.balance) {
+			throw new IllegalArgumentException();
+		} 
+		
 		if (withdraw(amount)) {
 //			상대방 계봐네 금액 입금
 			otherAccount.deposit(amount);
@@ -38,6 +46,13 @@ public class BankAcoount {
 		}else {
 			return false;
 		}
+	}
+	abstract String getAccountType();
+	
+	
+	@Override
+	public String toString() {
+		return String.format("%,d", balance);
 	}
 
 
