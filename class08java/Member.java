@@ -1,32 +1,52 @@
-package CHAPTER11.chapter11_0915;
+package com.ddit401.Bus_login.Console;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
+import java.util.Objects;
 
 public class Member {
-	public String name;
-	public int age;
+	String mem_id;
+	String mem_pw;
 	
-	public Member(String name, int age) {
-		this.name = name;
-		this.age = age;
-	}	
+	public Member() {
 		
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Member) {
-			Member member = (Member) obj;
-		return member.name.equals(name)&&(member.age==age);	
-		}else {
-			return false;
-		}
 	}
-
+	
+	public Member(String mem_id, String mem_pw) {
+		super();
+		this.mem_id = mem_id;
+		this.mem_pw = mem_pw;
+	}
+	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getMem_pw() {
+		return mem_pw;
+	}
+	public void setMem_pw(String mem_pw) {
+		this.mem_pw = mem_pw;
+	}
+	@Override
+	public String toString() {
+		return "Member [mem_id=" + mem_id + ", mem_pw=" + mem_pw + "]";
+	}
 	@Override
 	public int hashCode() {
-		return name.hashCode() + age;
+		return Objects.hash(mem_id, mem_pw);
 	}
-	
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Member other = (Member) obj;
+		return Objects.equals(mem_id, other.mem_id) && Objects.equals(mem_pw, other.mem_pw);
+	}
 	
 	
 }
